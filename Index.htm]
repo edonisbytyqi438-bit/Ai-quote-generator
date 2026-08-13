@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <title>AI Quote Generator</title>
+
+</head>
+
+<body>
+
+  <h1>AI Quote Generator</h1>
+
+  <p>Generate your daily motivation.</p>
+
+  <button onclick="generateQuote()">Generate Quote</button>
+
+  <h2 id="quote"></h2>
+
+  <script>
+
+    function generateQuote() {
+
+      const quotes = [
+
+        "Believe in yourself.",
+
+        "Never give up.",
+
+        "Your future is created by what you do today.",
+
+        "Small steps every day lead to big results.",
+
+        "Work hard and stay focused."
+
+      ];
+
+      const random = Math.floor(Mat
