@@ -8,73 +8,87 @@
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      margin: 0;
       min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #111827, #4f46e5);
       padding: 20px;
     }
 
     .container {
       width: 100%;
-      max-width: 500px;
-      background: white;
-      padding: 35px 25px;
-      border-radius: 24px;
+      max-width: 600px;
       text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     }
 
     h1 {
-      margin-top: 0;
-      font-size: 32px;
-      color: #111827;
+      font-size: 42px;
+      margin-bottom: 10px;
     }
 
     .subtitle {
-      color: #6b7280;
+      color: #cbd5e1;
       margin-bottom: 30px;
     }
 
-    #quote {
-      font-size: 22px;
-      line-height: 1.5;
-      color: #374151;
-      margin: 30px 10px;
-      min-height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 15px;
+      border-radius: 12px;
+      border: none;
+      resize: none;
+      font-size: 16px;
+      margin-bottom: 15px;
+      outline: none;
     }
 
     button {
+      width: 100%;
+      padding: 15px;
       border: none;
       border-radius: 12px;
-      padding: 14px 22px;
-      margin: 5px;
-      font-size: 16px;
+      background: #6366f1;
+      color: white;
+      font-size: 17px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .generate {
+    button:hover {
       background: #4f46e5;
-      color: white;
     }
 
-    .copy {
-      background: #e5e7eb;
-      color: #111827;
+    #result {
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(0,0,0,0.25);
+      border-radius: 15px;
+      min-height: 80px;
+      font-size: 20px;
+      line-height: 1.5;
     }
 
-    button:active {
-      transform: scale(0.97);
+    .footer {
+      margin-top: 20px;
+      color: #94a3b8;
+      font-size: 13px;
     }
   </style>
 </head>
@@ -82,29 +96,58 @@
 <body>
 
   <div class="container">
+
     <h1>✨ AI Quote Generator</h1>
 
     <p class="subtitle">
-      Get a fresh dose of motivation.
+      Turn your idea into an inspiring quote.
     </p>
 
-    <div id="quote">
-      Click the button to generate a quote.
+    <div class="card">
+
+      <textarea id="idea" placeholder="Write an idea... e.g. Never give up"></textarea>
+
+      <button onclick="generateQuote()">
+        Generate Quote
+      </button>
+
+      <div id="result">
+        Your quote will appear here...
+      </div>
+
     </div>
 
-    <button class="generate" onclick="generateQuote()">
-      🔄 New Quote
-    </button>
+    <div class="footer">
+      AI Quote Generator © 2026
+    </div>
 
-    <button class="copy" onclick="copyQuote()">
-      📋 Copy
-    </button>
   </div>
 
   <script>
-    const quotes = [
-      "Believe in yourself and keep moving forward.",
-      "Small steps every day create big results.",
-      "Your future is created by what you do today.",
-      "Don't wait for opportunity. Create it.",
-      "Success starts with the
+    function generateQuote() {
+
+      const idea = document.getElementById("idea").value.trim();
+      const result = document.getElementById("result");
+
+      if (!idea) {
+        result.innerText = "Please write an idea first.";
+        return;
+      }
+
+      const quotes = [
+        `"${idea} — every great journey begins with one small step."`,
+        `"Believe in ${idea}, keep moving forward, and never give up."`,
+        `"Your idea today can become your success tomorrow: ${idea}."`,
+        `"Stay focused on ${idea}. Progress takes patience, but it is worth it."`,
+        `"Great things happen when you turn ${idea} into action."`
+      ];
+
+      const randomQuote =
+        quotes[Math.floor(Math.random() * quotes.length)];
+
+      result.innerText = randomQuote;
+    }
+  </script>
+
+</body>
+</html>
