@@ -1,54 +1,246 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Construction Quote Generator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    #quote {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 10px;
+      background: #f7f7f7;
+      border: 1px solid #ddd;
+    }
+
+    .total {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .quote-line {
+      margin: 8px 0;
+    }
+  </style>
 </head>
 
 <body>
 
-  <h1>Construction Quote Generator</h1>
+  <div class="container">
 
-  <p>Create a professional construction quote.</p>
+    <h1>Construction Quote Generator</h1>
 
-  <label>Project type:</label>
-  <input id="project" type="text" placeholder="e.g. House renovation">
+    <p class="subtitle">
+      Create a professional construction estimate in seconds.
+    </p>
 
-  <br><br>
+    <label for="project">Project name</label>
+    <input
+      id="project"
+      type="text"
+      placeholder="e.g. House renovation"
+    >
 
-  <label>Material cost (€):</label>
-  <input id="materials" type="number" placeholder="e.g. 5000">
+    <label for="type">Project type</label>
+    <select id="type">
+      <option value="New Construction">New Construction</option>
+      <option value="House Renovation">House Renovation</option>
+      <option value="Roofing">Roofing</option>
+      <option value="Concrete Work">Concrete Work</option>
+      <option value="Painting">Painting</option>
+      <option value="Other">Other</option>
+    </select>
 
-  <br><br>
+    <label for="area">Area (m²)</label>
+    <input
+      id="area"
+      type="number"
+      min="0"
+      placeholder="e.g. 120"
+    >
 
-  <label>Labor cost (€):</label>
-  <input id="labor" type="number" placeholder="e.g. 3000">
+    <label for="price">Price per m² (€)</label>
+    <input
+      id="price"
+      type="number"
+      min="0"
+      placeholder="e.g. 50"
+    >
 
-  <br><br>
+    <label for="materials">Additional material cost (€)</label>
+    <input
+      id="materials"
+      type="number"
+      min="0"
+      placeholder="e.g. 2000"
+    >
 
-  <label>Other costs (€):</label>
-  <input id="other" type="number" placeholder="e.g. 500">
+    <label for="labor">Additional labor cost (€)</label>
+    <input
+      id="labor"
+      type="number"
+      min="0"
+      placeholder="e.g. 1500"
+    >
 
-  <br><br>
+    <label for="other">Other costs (€)</label>
+    <input
+      id="other"
+      type="number"
+      min="0"
+      placeholder="e.g. 500"
+    >
 
-  <button onclick="generateQuote()">Generate Construction Quote</button>
+    <button onclick="generateQuote()">
+      Generate Construction Quote
+    </button>
 
-  <div id="quote"></div>
+    <div id="quote"></div>
+
+  </div>
 
   <script>
     function generateQuote() {
-      const project = document.getElementById("project").value;
-      const materials = Number(document.getElementById("materials").value) || 0;
-      const labor = Number(document.getElementById("labor").value) || 0;
-      const other = Number(document.getElementById("other").value) || 0;
 
-      const total = materials + labor + other;
+      const project =
+        document.getElementById("project").value.trim() ||
+        "Construction Project";
 
-      document.getElementById("quote").innerHTML =
-        "Project: " + project + "<br>" +
-        "Materials: €" + materials + "<br>" +
-        "Labor: €" + labor + "<br>" +
-        "Other costs: €" + other + "<br><br>" +
-        "<strong>Total Quote: €" + total + "</strong>";
+      const type =
+        document.getElementById("type").value;
+
+      const area =
+        Number(document.getElementById("area").value) || 0;
+
+      const price =
+        Number(document.getElementById("price").value) || 0;
+
+      const materials =
+        Number(document.getElementById("materials").value) || 0;
+
+      const labor =
+        Number(document.getElementById("labor").value) || 0;
+
+      const other =
+        Number(document.getElementById("other").value) || 0;
+
+      const areaCost = area * price;
+
+      const total =
+        areaCost + materials + labor + other;
+
+      const quote = document.getElementById("quote");
+
+      quote.style.display = "block";
+
+      quote.innerHTML = `
+        <h2>Construction Quote</h2>
+
+        <div class="quote-line">
+          <strong>Project:</strong> ${project}
+        </div>
+
+        <div class="quote-line">
+          <strong>Type:</strong> ${type}
+        </div>
+
+        <div class="quote-line">
+          <strong>Area:</strong> ${area} m²
+        </div>
+
+        <div class="quote-line">
+          <strong>Base construction:</strong>
+          €${areaCost.toFixed(2)}
+        </div>
+
+        <div class="quote-line">
+          <strong>Materials:</strong>
+          €${materials.toFixed(2)}
+        </div>
+
+        <div class="quote-line">
+          <strong>Labor:</strong>
+          €${labor.toFixed(2)}
+        </div>
+
+        <div class="quote-line">
+          <strong>Other costs:</strong>
+          €${other.toFixed(2)}
+        </div>
+
+        <div class="total">
+          Total Quote: €${total.toFixed(2)}
+        </div>
+      `;
     }
   </script>
 
