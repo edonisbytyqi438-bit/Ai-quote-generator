@@ -35,7 +35,7 @@
         "Work hard and stay focused."
 
       ];
-
-      const random = Math.floor(Math
-quote.innerText = quotes[random];
+const random = Math.floor(Math.random() * quotes.length);
+document.getElementById("quote").innerText = quotes[random];
 }
+      
