@@ -15,22 +15,22 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
-      background: #f4f6f8;
+      background: #f1f3f5;
       color: #222;
     }
 
     .container {
-      max-width: 650px;
-      margin: 30px auto;
+      max-width: 700px;
+      margin: 20px auto;
       background: white;
       padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      border-radius: 16px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.08);
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .subtitle {
@@ -57,13 +57,13 @@
 
     button {
       width: 100%;
-      margin-top: 25px;
       padding: 14px;
+      margin-top: 20px;
       border: none;
       border-radius: 8px;
       background: #222;
       color: white;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
     }
@@ -74,21 +74,59 @@
 
     #quote {
       display: none;
-      margin-top: 25px;
-      padding: 20px;
-      border-radius: 10px;
-      background: #f7f7f7;
+      margin-top: 30px;
+      padding: 25px;
       border: 1px solid #ddd;
+      border-radius: 12px;
+      background: white;
+    }
+
+    .quote-header {
+      text-align: center;
+      border-bottom: 2px solid #222;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .quote-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
     }
 
     .total {
-      font-size: 24px;
+      font-size: 25px;
       font-weight: bold;
-      margin-top: 15px;
+      margin-top: 20px;
+      text-align: right;
     }
 
-    .quote-line {
-      margin: 8px 0;
+    .print-button {
+      background: #555;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .container {
+        box-shadow: none;
+        max-width: 100%;
+      }
+
+      .form-section,
+      .main-button,
+      .print-button {
+        display: none;
+      }
+
+      #quote {
+        display: block !important;
+        border: none;
+      }
     }
   </style>
 </head>
@@ -97,79 +135,106 @@
 
   <div class="container">
 
-    <h1>Construction Quote Generator</h1>
+    <div class="form-section">
 
-    <p class="subtitle">
-      Create a professional construction estimate in seconds.
-    </p>
+      <h1>Construction Quote Generator</h1>
 
-    <label for="project">Project name</label>
-    <input
-      id="project"
-      type="text"
-      placeholder="e.g. House renovation"
-    >
+      <p class="subtitle">
+        Create a professional construction estimate.
+      </p>
 
-    <label for="type">Project type</label>
-    <select id="type">
-      <option value="New Construction">New Construction</option>
-      <option value="House Renovation">House Renovation</option>
-      <option value="Roofing">Roofing</option>
-      <option value="Concrete Work">Concrete Work</option>
-      <option value="Painting">Painting</option>
-      <option value="Other">Other</option>
-    </select>
+      <label>Company Name</label>
+      <input
+        id="company"
+        type="text"
+        placeholder="e.g. ABC Construction"
+      >
 
-    <label for="area">Area (m²)</label>
-    <input
-      id="area"
-      type="number"
-      min="0"
-      placeholder="e.g. 120"
-    >
+      <label>Client Name</label>
+      <input
+        id="client"
+        type="text"
+        placeholder="e.g. John Smith"
+      >
 
-    <label for="price">Price per m² (€)</label>
-    <input
-      id="price"
-      type="number"
-      min="0"
-      placeholder="e.g. 50"
-    >
+      <label>Project Name</label>
+      <input
+        id="project"
+        type="text"
+        placeholder="e.g. House Renovation"
+      >
 
-    <label for="materials">Additional material cost (€)</label>
-    <input
-      id="materials"
-      type="number"
-      min="0"
-      placeholder="e.g. 2000"
-    >
+      <label>Project Type</label>
+      <select id="type">
+        <option>New Construction</option>
+        <option>House Renovation</option>
+        <option>Roofing</option>
+        <option>Concrete Work</option>
+        <option>Painting</option>
+        <option>Other</option>
+      </select>
 
-    <label for="labor">Additional labor cost (€)</label>
-    <input
-      id="labor"
-      type="number"
-      min="0"
-      placeholder="e.g. 1500"
-    >
+      <label>Area (m²)</label>
+      <input
+        id="area"
+        type="number"
+        min="0"
+        placeholder="e.g. 120"
+      >
 
-    <label for="other">Other costs (€)</label>
-    <input
-      id="other"
-      type="number"
-      min="0"
-      placeholder="e.g. 500"
-    >
+      <label>Price per m² (€)</label>
+      <input
+        id="price"
+        type="number"
+        min="0"
+        placeholder="e.g. 50"
+      >
 
-    <button onclick="generateQuote()">
-      Generate Construction Quote
-    </button>
+      <label>Materials (€)</label>
+      <input
+        id="materials"
+        type="number"
+        min="0"
+        placeholder="e.g. 2000"
+      >
+
+      <label>Labor (€)</label>
+      <input
+        id="labor"
+        type="number"
+        min="0"
+        placeholder="e.g. 1500"
+      >
+
+      <label>Other Costs (€)</label>
+      <input
+        id="other"
+        type="number"
+        min="0"
+        placeholder="e.g. 500"
+      >
+
+      <button class="main-button" onclick="generateQuote()">
+        Generate Construction Quote
+      </button>
+
+    </div>
 
     <div id="quote"></div>
 
   </div>
 
   <script>
+
     function generateQuote() {
+
+      const company =
+        document.getElementById("company").value.trim() ||
+        "Construction Company";
+
+      const client =
+        document.getElementById("client").value.trim() ||
+        "Client";
 
       const project =
         document.getElementById("project").value.trim() ||
@@ -198,50 +263,86 @@
       const total =
         areaCost + materials + labor + other;
 
-      const quote = document.getElementById("quote");
+      const quoteNumber =
+        "Q-" + Math.floor(1000 + Math.random() * 9000);
+
+      const date =
+        new Date().toLocaleDateString();
+
+      const quote =
+        document.getElementById("quote");
 
       quote.style.display = "block";
 
       quote.innerHTML = `
-        <h2>Construction Quote</h2>
 
-        <div class="quote-line">
+        <div class="quote-header">
+
+          <h2>CONSTRUCTION QUOTE</h2>
+
+          <p><strong>${company}</strong></p>
+
+          <p>Quote #: ${quoteNumber}</p>
+
+          <p>Date: ${date}</p>
+
+        </div>
+
+        <p>
+          <strong>Client:</strong> ${client}
+        </p>
+
+        <p>
           <strong>Project:</strong> ${project}
-        </div>
+        </p>
 
-        <div class="quote-line">
+        <p>
           <strong>Type:</strong> ${type}
-        </div>
+        </p>
 
-        <div class="quote-line">
+        <p>
           <strong>Area:</strong> ${area} m²
+        </p>
+
+        <h3>Cost Breakdown</h3>
+
+        <div class="quote-row">
+          <span>Construction (${area} m² × €${price})</span>
+          <span>€${areaCost.toFixed(2)}</span>
         </div>
 
-        <div class="quote-line">
-          <strong>Base construction:</strong>
-          €${areaCost.toFixed(2)}
+        <div class="quote-row">
+          <span>Materials</span>
+          <span>€${materials.toFixed(2)}</span>
         </div>
 
-        <div class="quote-line">
-          <strong>Materials:</strong>
-          €${materials.toFixed(2)}
+        <div class="quote-row">
+          <span>Labor</span>
+          <span>€${labor.toFixed(2)}</span>
         </div>
 
-        <div class="quote-line">
-          <strong>Labor:</strong>
-          €${labor.toFixed(2)}
-        </div>
-
-        <div class="quote-line">
-          <strong>Other costs:</strong>
-          €${other.toFixed(2)}
+        <div class="quote-row">
+          <span>Other Costs</span>
+          <span>€${other.toFixed(2)}</span>
         </div>
 
         <div class="total">
-          Total Quote: €${total.toFixed(2)}
+          TOTAL: €${total.toFixed(2)}
         </div>
+
+        <button
+          class="print-button"
+          onclick="window.print()">
+          Print / Save as PDF
+        </button>
+
       `;
+
+      quote.scrollIntoView({
+        behavior: "smooth"
+      });
     }
+
   </script>
 
 </body>
