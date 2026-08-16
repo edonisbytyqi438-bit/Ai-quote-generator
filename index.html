@@ -4,23 +4,47 @@
 
 <head>
 
-  <title>AI Quote Generator</title>
+  <title>Construction Quote Generator</title>
 
 </head>
 
 <body>
 
-  <h1>AI Quote Generator</h1>
+  <h1>Construction Quote Generator</h1>
 
-  <p>Generate your daily motivation.</p>
+  <p>Create a professional construction quote.</p><label>Project type:</label>
+<input id="project" type="text" placeholder="e.g. House renovation">
 
-  <button onclick="generateQuote()">Generate Quote</button>
+<label>Material cost (€):</label>
+<input id="materials" type="number" placeholder="e.g. 5000">
 
-  <h2 id="quote"></h2>
+<label>Labor cost (€):</label>
+<input id="labor" type="number" placeholder="e.g. 3000">
+
+<label>Other costs (€):</label>
+<input id="other" type="number" placeholder="e.g. 500">
+
+  <button onclick="generateQuote()">Generate Construction Quote</button>
+
+  <div id="quote"></div>
 
   <script>
 
     function generateQuote() {
+  const project = document.getElementById("project").value;
+  const materials = Number(document.getElementById("materials").value) || 0;
+  const labor = Number(document.getElementById("labor").value) || 0;
+  const other = Number(document.getElementById("other").value) || 0;
+
+  const total = materials + labor + other;
+
+  document.getElementById("quote").innerHTML =
+    "Project: " + project + "<br>" +
+    "Materials: €" + materials + "<br>" +
+    "Labor: €" + labor + "<br>" +
+    "Other costs: €" + other + "<br><br>" +
+    "<strong>Total Quote: €" + total + "</strong>";
+}
 
       const quotes = [
 
