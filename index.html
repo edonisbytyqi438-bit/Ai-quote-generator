@@ -1,67 +1,56 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
   <title>Construction Quote Generator</title>
-
 </head>
 
 <body>
 
   <h1>Construction Quote Generator</h1>
 
-  <p>Create a professional construction quote.</p><label>Project type:</label>
-<input id="project" type="text" placeholder="e.g. House renovation">
+  <p>Create a professional construction quote.</p>
 
-<label>Material cost (€):</label>
-<input id="materials" type="number" placeholder="e.g. 5000">
+  <label>Project type:</label>
+  <input id="project" type="text" placeholder="e.g. House renovation">
 
-<label>Labor cost (€):</label>
-<input id="labor" type="number" placeholder="e.g. 3000">
+  <br><br>
 
-<label>Other costs (€):</label>
-<input id="other" type="number" placeholder="e.g. 500">
+  <label>Material cost (€):</label>
+  <input id="materials" type="number" placeholder="e.g. 5000">
+
+  <br><br>
+
+  <label>Labor cost (€):</label>
+  <input id="labor" type="number" placeholder="e.g. 3000">
+
+  <br><br>
+
+  <label>Other costs (€):</label>
+  <input id="other" type="number" placeholder="e.g. 500">
+
+  <br><br>
 
   <button onclick="generateQuote()">Generate Construction Quote</button>
 
   <div id="quote"></div>
 
   <script>
-
     function generateQuote() {
-  const project = document.getElementById("project").value;
-  const materials = Number(document.getElementById("materials").value) || 0;
-  const labor = Number(document.getElementById("labor").value) || 0;
-  const other = Number(document.getElementById("other").value) || 0;
+      const project = document.getElementById("project").value;
+      const materials = Number(document.getElementById("materials").value) || 0;
+      const labor = Number(document.getElementById("labor").value) || 0;
+      const other = Number(document.getElementById("other").value) || 0;
 
-  const total = materials + labor + other;
+      const total = materials + labor + other;
 
-  document.getElementById("quote").innerHTML =
-    "Project: " + project + "<br>" +
-    "Materials: €" + materials + "<br>" +
-    "Labor: €" + labor + "<br>" +
-    "Other costs: €" + other + "<br><br>" +
-    "<strong>Total Quote: €" + total + "</strong>";
-}
+      document.getElementById("quote").innerHTML =
+        "Project: " + project + "<br>" +
+        "Materials: €" + materials + "<br>" +
+        "Labor: €" + labor + "<br>" +
+        "Other costs: €" + other + "<br><br>" +
+        "<strong>Total Quote: €" + total + "</strong>";
+    }
+  </script>
 
-      const quotes = [
-
-        "Believe in yourself.",
-
-        "Never give up.",
-
-        "Your future is created by what you do today.",
-
-        "Small steps every day lead to big results.",
-
-        "Work hard and stay focused."
-
-      ];
-const random = Math.floor(Math.random() * quotes.length);
-document.getElementById("quote").innerText = quotes[random];
-}</script>
 </body>
 </html>
-      
