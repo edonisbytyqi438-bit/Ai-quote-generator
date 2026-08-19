@@ -88,6 +88,12 @@
       margin-bottom: 20px;
     }
 
+    .quote-contact {
+      text-align: center;
+      color: #555;
+      margin-top: 10px;
+    }
+
     .quote-row {
       display: flex;
       justify-content: space-between;
@@ -148,6 +154,20 @@
         id="company"
         type="text"
         placeholder="e.g. ABC Construction"
+      >
+
+      <label>Phone Number</label>
+      <input
+        id="phone"
+        type="tel"
+        placeholder="e.g. +383 44 123 456"
+      >
+
+      <label>Email</label>
+      <input
+        id="email"
+        type="email"
+        placeholder="e.g. company@email.com"
       >
 
       <label>Client Name</label>
@@ -232,6 +252,14 @@
         document.getElementById("company").value.trim() ||
         "Construction Company";
 
+      const phone =
+        document.getElementById("phone").value.trim() ||
+        "Not provided";
+
+      const email =
+        document.getElementById("email").value.trim() ||
+        "Not provided";
+
       const client =
         document.getElementById("client").value.trim() ||
         "Client";
@@ -281,6 +309,11 @@
           <h2>CONSTRUCTION QUOTE</h2>
 
           <p><strong>${company}</strong></p>
+
+          <div class="quote-contact">
+            <p>📞 ${phone}</p>
+            <p>✉️ ${email}</p>
+          </div>
 
           <p>Quote #: ${quoteNumber}</p>
 
