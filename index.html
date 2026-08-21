@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Construction Quote Generator</title>
 
   <style>
@@ -12,16 +11,16 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 20px;
+      font-family: Arial, sans-serif;
       background: #f1f3f5;
       color: #222;
     }
 
     .container {
       max-width: 700px;
-      margin: 20px auto;
+      margin: auto;
       background: white;
       padding: 25px;
       border-radius: 16px;
@@ -68,10 +67,6 @@
       cursor: pointer;
     }
 
-    button:hover {
-      opacity: 0.9;
-    }
-
     #quote {
       display: none;
       margin-top: 30px;
@@ -89,15 +84,14 @@
     }
 
     .quote-contact {
-      text-align: center;
       color: #555;
-      margin-top: 10px;
     }
 
     .quote-row {
       display: flex;
       justify-content: space-between;
-      padding: 8px 0;
+      gap: 20px;
+      padding: 10px 0;
       border-bottom: 1px solid #eee;
     }
 
@@ -139,244 +133,199 @@
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="form-section">
+  <div class="form-section">
 
-      <h1>🏗️ Construction Quote Generator</h1>
+    <h1>🏗️ Construction Quote Generator</h1>
 
-      <p class="subtitle">
-        Create a professional construction estimate.
-      </p>
+    <p class="subtitle">
+      Create a professional construction estimate in seconds.
+    </p>
 
-      <label>Company Name</label>
-      <input
-        id="company"
-        type="text"
-        placeholder="e.g. ABC Construction"
-      >
+    <label>Company Name</label>
+    <input id="company" type="text" placeholder="ABC Construction">
 
-      <label>Phone Number</label>
-      <input
-        id="phone"
-        type="tel"
-        placeholder="e.g. +383 44 123 456"
-      >
+    <label>Phone Number</label>
+    <input id="phone" type="tel" placeholder="+383 44 123 456">
 
-      <label>Email</label>
-      <input
-        id="email"
-        type="email"
-        placeholder="e.g. company@email.com"
-      >
+    <label>Email</label>
+    <input id="email" type="email" placeholder="company@email.com">
 
-      <label>Client Name</label>
-      <input
-        id="client"
-        type="text"
-        placeholder="e.g. John Smith"
-      >
+    <label>Client Name</label>
+    <input id="client" type="text" placeholder="John Smith">
 
-      <label>Project Name</label>
-      <input
-        id="project"
-        type="text"
-        placeholder="e.g. House Renovation"
-      >
+    <label>Project Name</label>
+    <input id="project" type="text" placeholder="House Renovation">
 
-      <label>Project Type</label>
-      <select id="type">
-        <option>New Construction</option>
-        <option>House Renovation</option>
-        <option>Roofing</option>
-        <option>Concrete Work</option>
-        <option>Painting</option>
-        <option>Other</option>
-      </select>
+    <label>Project Type</label>
+    <select id="type">
+      <option>New Construction</option>
+      <option>House Renovation</option>
+      <option>Roofing</option>
+      <option>Concrete Work</option>
+      <option>Painting</option>
+      <option>Other</option>
+    </select>
 
-      <label>Area (m²)</label>
-      <input
-        id="area"
-        type="number"
-        min="0"
-        placeholder="e.g. 120"
-      >
+    <label>Area (m²)</label>
+    <input id="area" type="number" min="0" placeholder="120">
 
-      <label>Price per m² (€)</label>
-      <input
-        id="price"
-        type="number"
-        min="0"
-        placeholder="e.g. 50"
-      >
+    <label>Price per m² (€)</label>
+    <input id="price" type="number" min="0" placeholder="50">
 
-      <label>Materials (€)</label>
-      <input
-        id="materials"
-        type="number"
-        min="0"
-        placeholder="e.g. 2000"
-      >
+    <label>Materials (€)</label>
+    <input id="materials" type="number" min="0" placeholder="2000">
 
-      <label>Labor (€)</label>
-      <input
-        id="labor"
-        type="number"
-        min="0"
-        placeholder="e.g. 1500"
-      >
+    <label>Labor (€)</label>
+    <input id="labor" type="number" min="0" placeholder="1500">
 
-      <label>Other Costs (€)</label>
-      <input
-        id="other"
-        type="number"
-        min="0"
-        placeholder="e.g. 500"
-      >
+    <label>Other Costs (€)</label>
+    <input id="other" type="number" min="0" placeholder="500">
 
-      <button class="main-button" onclick="generateQuote()">
-        Generate Construction Quote
-      </button>
-
-    </div>
-
-    <div id="quote"></div>
+    <button class="main-button" onclick="generateQuote()">
+      Generate Construction Quote
+    </button>
 
   </div>
 
-  <script>
+  <div id="quote"></div>
 
-    function generateQuote() {
+</div>
 
-      const company =
-        document.getElementById("company").value.trim() ||
-        "Construction Company";
+<script>
 
-      const phone =
-        document.getElementById("phone").value.trim() ||
-        "Not provided";
+function generateQuote() {
 
-      const email =
-        document.getElementById("email").value.trim() ||
-        "Not provided";
+  const company =
+    document.getElementById("company").value.trim() ||
+    "Construction Company";
 
-      const client =
-        document.getElementById("client").value.trim() ||
-        "Client";
+  const phone =
+    document.getElementById("phone").value.trim() ||
+    "Not provided";
 
-      const project =
-        document.getElementById("project").value.trim() ||
-        "Construction Project";
+  const email =
+    document.getElementById("email").value.trim() ||
+    "Not provided";
 
-      const type =
-        document.getElementById("type").value;
+  const client =
+    document.getElementById("client").value.trim() ||
+    "Client";
 
-      const area =
-        Number(document.getElementById("area").value) || 0;
+  const project =
+    document.getElementById("project").value.trim() ||
+    "Construction Project";
 
-      const price =
-        Number(document.getElementById("price").value) || 0;
+  const type =
+    document.getElementById("type").value;
 
-      const materials =
-        Number(document.getElementById("materials").value) || 0;
+  const area =
+    Number(document.getElementById("area").value) || 0;
 
-      const labor =
-        Number(document.getElementById("labor").value) || 0;
+  const price =
+    Number(document.getElementById("price").value) || 0;
 
-      const other =
-        Number(document.getElementById("other").value) || 0;
+  const materials =
+    Number(document.getElementById("materials").value) || 0;
 
-      const areaCost = area * price;
+  const labor =
+    Number(document.getElementById("labor").value) || 0;
 
-      const total =
-        areaCost + materials + labor + other;
+  const other =
+    Number(document.getElementById("other").value) || 0;
 
-      const quoteNumber =
-        "Q-" + Math.floor(1000 + Math.random() * 9000);
+  const areaCost = area * price;
 
-      const date =
-        new Date().toLocaleDateString();
+  const total =
+    areaCost + materials + labor + other;
 
-      const quote =
-        document.getElementById("quote");
+  const quoteNumber =
+    "Q-" + Math.floor(10000 + Math.random() * 90000);
 
-      quote.style.display = "block";
+  const date =
+    new Date().toLocaleDateString();
 
-      quote.innerHTML = `
+  const quote =
+    document.getElementById("quote");
 
-        <div class="quote-header">
+  quote.style.display = "block";
 
-          <h2>CONSTRUCTION QUOTE</h2>
+  quote.innerHTML = `
 
-          <p><strong>${company}</strong></p>
+    <div class="quote-header">
 
-          <div class="quote-contact">
-            <p>📞 ${phone}</p>
-            <p>✉️ ${email}</p>
-          </div>
+      <h2>CONSTRUCTION QUOTE</h2>
 
-          <p>Quote #: ${quoteNumber}</p>
+      <p><strong>${company}</strong></p>
 
-          <p>Date: ${date}</p>
+      <div class="quote-contact">
+        <p>📞 ${phone}</p>
+        <p>✉️ ${email}</p>
+      </div>
 
-        </div>
+      <p><strong>Quote #:</strong> ${quoteNumber}</p>
 
-        <p>
-          <strong>Client:</strong> ${client}
-        </p>
+      <p><strong>Date:</strong> ${date}</p>
 
-        <p>
-          <strong>Project:</strong> ${project}
-        </p>
+    </div>
 
-        <p>
-          <strong>Type:</strong> ${type}
-        </p>
+    <p>
+      <strong>Client:</strong> ${client}
+    </p>
 
-        <p>
-          <strong>Area:</strong> ${area} m²
-        </p>
+    <p>
+      <strong>Project:</strong> ${project}
+    </p>
 
-        <h3>Cost Breakdown</h3>
+    <p>
+      <strong>Type:</strong> ${type}
+    </p>
 
-        <div class="quote-row">
-          <span>Construction (${area} m² × €${price})</span>
-          <span>€${areaCost.toFixed(2)}</span>
-        </div>
+    <p>
+      <strong>Area:</strong> ${area} m²
+    </p>
 
-        <div class="quote-row">
-          <span>Materials</span>
-          <span>€${materials.toFixed(2)}</span>
-        </div>
+    <h3>Cost Breakdown</h3>
 
-        <div class="quote-row">
-          <span>Labor</span>
-          <span>€${labor.toFixed(2)}</span>
-        </div>
+    <div class="quote-row">
+      <span>Construction</span>
+      <span>€${areaCost.toFixed(2)}</span>
+    </div>
 
-        <div class="quote-row">
-          <span>Other Costs</span>
-          <span>€${other.toFixed(2)}</span>
-        </div>
+    <div class="quote-row">
+      <span>Materials</span>
+      <span>€${materials.toFixed(2)}</span>
+    </div>
 
-        <div class="total">
-          TOTAL: €${total.toFixed(2)}
-        </div>
+    <div class="quote-row">
+      <span>Labor</span>
+      <span>€${labor.toFixed(2)}</span>
+    </div>
 
-        <button
-          class="print-button"
-          onclick="window.print()">
-          Print / Save as PDF
-        </button>
+    <div class="quote-row">
+      <span>Other Costs</span>
+      <span>€${other.toFixed(2)}</span>
+    </div>
 
-      `;
+    <div class="total">
+      TOTAL: €${total.toFixed(2)}
+    </div>
 
-      quote.scrollIntoView({
-        behavior: "smooth"
-      });
-    }
+    <button
+      class="print-button"
+      onclick="window.print()">
+      Print / Save as PDF
+    </button>
 
-  </script>
+  `;
+
+  quote.scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+</script>
 
 </body>
 </html>
