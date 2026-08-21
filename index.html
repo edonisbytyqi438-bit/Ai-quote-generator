@@ -1,374 +1,868 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProQuote Construction</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProQuote Construction</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+*{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: Arial, sans-serif;
-      background: #eef1f4;
-      color: #1f2937;
-    }
+body{
+margin:0;
+padding:18px;
+font-family:Arial,sans-serif;
+background:#eef1f4;
+color:#1f2937;
+}
 
-    .container {
-      max-width: 720px;
-      margin: 20px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 18px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    }
+.container{
+max-width:900px;
+margin:auto;
+}
 
-    .brand {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+.card{
+background:white;
+padding:25px;
+border-radius:18px;
+box-shadow:0 8px 30px rgba(0,0,0,.08);
+margin-bottom:20px;
+}
 
-    .brand-logo {
-      font-size: 48px;
-    }
+.brand{
+text-align:center;
+margin-bottom:25px;
+}
 
-    h1 {
-      margin: 0;
-      font-size: 30px;
-    }
+.logo{
+font-size:50px;
+}
 
-    .subtitle {
-      color: #6b7280;
-      margin-top: 8px;
-    }
+h1{
+margin:5px 0;
+font-size:30px;
+}
 
-    .section-title {
-      margin-top: 28px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #222;
-      font-size: 18px;
-      font-weight: bold;
-    }
+.subtitle{
+color:#6b7280;
+}
 
-    label {
-      display: block;
-      margin-top: 16px;
-      margin-bottom: 6px;
-      font-weight: bold;
-    }
+.section-title{
+margin-top:25px;
+margin-bottom:12px;
+padding-bottom:8px;
+border-bottom:2px solid #222;
+font-size:18px;
+font-weight:bold;
+}
 
-    input,
-    select {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #d1d5db;
-      border-radius: 9px;
-      font-size: 16px;
-      background: white;
-    }
+label{
+display:block;
+font-weight:bold;
+margin-top:14px;
+margin-bottom:6px;
+}
 
-    input:focus,
-    select:focus {
-      outline: none;
-      border-color: #222;
-    }
+input,select{
+width:100%;
+padding:13px;
+border:1px solid #d1d5db;
+border-radius:9px;
+font-size:16px;
+background:white;
+}
 
-    button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 24px;
-      border: none;
-      border-radius: 9px;
-      background: #222;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+button{
+border:0;
+border-radius:9px;
+padding:13px 16px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+margin-top:12px;
+}
 
-    button:hover {
-      opacity: 0.9;
-    }
+.primary{
+width:100%;
+background:#222;
+color:white;
+}
 
-    .new-button {
-      background: #777;
-    }
+.secondary{
+background:#666;
+color:white;
+}
 
-    #quote {
-      display: none;
-      margin-top: 35px;
-      padding: 28px;
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      background: white;
-    }
+.green{
+background:#16803c;
+color:white;
+}
 
-    .quote-header {
-      text-align: center;
-      border-bottom: 2px solid #222;
-      padding-bottom: 18px;
-      margin-bottom: 22px;
-    }
+.red{
+background:#b42318;
+color:white;
+}
 
-    .quote-contact {
-      color: #555;
-    }
+.item{
+border:1px solid #ddd;
+padding:15px;
+border-radius:12px;
+margin-top:12px;
+background:#fafafa;
+}
 
-    .quote-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 11px 0;
-      border-bottom: 1px solid #eee;
-    }
+.item-grid{
+display:grid;
+grid-template-columns:2fr 1fr 1fr;
+gap:10px;
+}
 
-    .total {
-      font-size: 26px;
-      font-weight: bold;
-      margin-top: 24px;
-      text-align: right;
-    }
+.item-total{
+font-weight:bold;
+margin-top:10px;
+}
 
-    .print-button {
-      background: #555;
-    }
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
 
-    @media print {
-      body {
-        background: white;
-        padding: 0;
-      }
+#quote{
+display:none;
+}
 
-      .container {
-        box-shadow: none;
-        max-width: 100%;
-      }
+.quote-header{
+text-align:center;
+border-bottom:2px solid #222;
+padding-bottom:18px;
+margin-bottom:20px;
+}
 
-      .form-section,
-      .main-button,
-      .new-button,
-      .print-button {
-        display: none;
-      }
+.quote-row{
+display:flex;
+justify-content:space-between;
+gap:20px;
+padding:10px 0;
+border-bottom:1px solid #eee;
+}
 
-      #quote {
-        display: block !important;
-        border: none;
-      }
-    }
-  </style>
+.total{
+font-size:27px;
+font-weight:bold;
+text-align:right;
+margin-top:20px;
+}
+
+.history-item{
+border:1px solid #ddd;
+padding:15px;
+border-radius:10px;
+margin-top:10px;
+}
+
+.history-item strong{
+font-size:17px;
+}
+
+.small{
+color:#666;
+font-size:14px;
+}
+
+@media(max-width:600px){
+
+body{
+padding:10px;
+}
+
+.card{
+padding:18px;
+}
+
+.item-grid{
+grid-template-columns:1fr;
+}
+
+.actions{
+grid-template-columns:1fr;
+}
+
+h1{
+font-size:25px;
+}
+
+}
+
+@media print{
+
+body{
+background:white;
+padding:0;
+}
+
+.form-card,
+.history-card,
+.print-hide{
+display:none!important;
+}
+
+.card{
+box-shadow:none;
+padding:0;
+}
+
+#quote{
+display:block!important;
+}
+
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-  <div class="form-section">
+<div class="card form-card">
 
-    <div class="brand">
-      <div class="brand-logo">🏗️</div>
+<div class="brand">
 
-      <h1>ProQuote Construction</h1>
+<div class="logo">🏗️</div>
 
-      <p class="subtitle">
-        Professional construction estimates in seconds.
-      </p>
-    </div>
+<h1>ProQuote Construction</h1>
 
-    <div class="section-title">
-      Company Information
-    </div>
-
-    <label>Company Name</label>
-    <input id="company" type="text" placeholder="ABC Construction">
-
-    <label>Phone Number</label>
-    <input id="phone" type="tel" placeholder="+383 44 123 456">
-
-    <label>Email</label>
-    <input id="email" type="email" placeholder="company@email.com">
-
-    <div class="section-title">
-      Project Information
-    </div>
-
-    <label>Client Name</label>
-    <input id="client" type="text" placeholder="John Smith">
-
-    <label>Project Name</label>
-    <input id="project" type="text" placeholder="House Renovation">
-
-    <label>Project Type</label>
-    <select id="type">
-      <option>New Construction</option>
-      <option>House Renovation</option>
-      <option>Roofing</option>
-      <option>Concrete Work</option>
-      <option>Painting</option>
-      <option>Other</option>
-    </select>
-
-    <label>Area (m²)</label>
-    <input id="area" type="number" min="0" placeholder="120">
-
-    <label>Price per m² (€)</label>
-    <input id="price" type="number" min="0" placeholder="50">
-
-    <div class="section-title">
-      Costs
-    </div>
-
-    <label>Materials (€)</label>
-    <input id="materials" type="number" min="0" placeholder="2000">
-
-    <label>Labor (€)</label>
-    <input id="labor" type="number" min="0" placeholder="1500">
-
-    <label>Other Costs (€)</label>
-    <input id="other" type="number" min="0" placeholder="500">
-
-    <button class="main-button" onclick="generateQuote()">
-      Generate Construction Quote
-    </button>
-
-  </div>
-
-  <div id="quote"></div>
+<p class="subtitle">
+Professional construction estimates
+</p>
 
 </div>
 
+<div class="section-title">
+Company Information
+</div>
+
+<label>Company Name</label>
+<input id="company" placeholder="ABC Construction">
+
+<label>Phone</label>
+<input id="phone" placeholder="+383 44 123 456">
+
+<label>Email</label>
+<input id="email" placeholder="company@email.com">
+
+<div class="section-title">
+Client & Project
+</div>
+
+<label>Client Name</label>
+<input id="client" placeholder="John Smith">
+
+<label>Project Name</label>
+<input id="project" placeholder="House Renovation">
+
+<label>Project Type</label>
+
+<select id="type">
+
+<option>New Construction</option>
+<option>House Renovation</option>
+<option>Roofing</option>
+<option>Concrete Work</option>
+<option>Painting</option>
+<option>Other</option>
+
+</select>
+
+<div class="section-title">
+Construction Items
+</div>
+
+<div id="items"></div>
+
+<button class="secondary" onclick="addItem()">
++ Add Item
+</button>
+
+<div class="section-title">
+Discount & VAT
+</div>
+
+<label>Discount (%)</label>
+<input id="discount" type="number" value="0" min="0" oninput="updateTotals()">
+
+<label>VAT (%)</label>
+<input id="vat" type="number" value="0" min="0" oninput="updateTotals()">
+
+<div id="liveTotals" class="small"></div>
+
+<button class="primary" onclick="generateQuote()">
+Generate Construction Quote
+</button>
+
+<button class="secondary" onclick="newQuote()">
++ New Quote
+</button>
+
+</div>
+
+
+<div class="card" id="quote"></div>
+
+
+<div class="card history-card">
+
+<h2>📋 Quote History</h2>
+
+<input
+id="search"
+placeholder="Search by client or project..."
+oninput="showHistory()"
+>
+
+<div id="history"></div>
+
+</div>
+
+</div>
+
+
 <script>
 
-function generateQuote() {
+let items=[];
+let itemCounter=0;
 
-  const company = document.getElementById("company").value.trim() || "Construction Company";
-  const phone = document.getElementById("phone").value.trim() || "Not provided";
-  const email = document.getElementById("email").value.trim() || "Not provided";
-  const client = document.getElementById("client").value.trim() || "Client";
-  const project = document.getElementById("project").value.trim() || "Construction Project";
-  const type = document.getElementById("type").value;
+function addItem(){
 
-  const area = Number(document.getElementById("area").value) || 0;
-  const price = Number(document.getElementById("price").value) || 0;
-  const materials = Number(document.getElementById("materials").value) || 0;
-  const labor = Number(document.getElementById("labor").value) || 0;
-  const other = Number(document.getElementById("other").value) || 0;
+itemCounter++;
 
-  const areaCost = area * price;
-  const total = areaCost + materials + labor + other;
+const id=itemCounter;
 
-  const quoteNumber =
-    "Q-" + Math.floor(10000 + Math.random() * 90000);
+items.push({
+id:id,
+name:"",
+qty:1,
+price:0
+});
 
-  const date = new Date().toLocaleDateString();
+renderItems();
 
-  const quote = document.getElementById("quote");
-
-  quote.style.display = "block";
-
-  quote.innerHTML = `
-
-    <div class="quote-header">
-
-      <div style="font-size:38px;">🏗️</div>
-
-      <h2>PROQUOTE CONSTRUCTION</h2>
-
-      <p><strong>${company}</strong></p>
-
-      <div class="quote-contact">
-        <p>📞 ${phone}</p>
-        <p>✉️ ${email}</p>
-      </div>
-
-      <p><strong>Quote #:</strong> ${quoteNumber}</p>
-
-      <p><strong>Date:</strong> ${date}</p>
-
-    </div>
-
-    <p><strong>Client:</strong> ${client}</p>
-
-    <p><strong>Project:</strong> ${project}</p>
-
-    <p><strong>Type:</strong> ${type}</p>
-
-    <p><strong>Area:</strong> ${area} m²</p>
-
-    <h3>Cost Breakdown</h3>
-
-    <div class="quote-row">
-      <span>Construction</span>
-      <span>€${areaCost.toFixed(2)}</span>
-    </div>
-
-    <div class="quote-row">
-      <span>Materials</span>
-      <span>€${materials.toFixed(2)}</span>
-    </div>
-
-    <div class="quote-row">
-      <span>Labor</span>
-      <span>€${labor.toFixed(2)}</span>
-    </div>
-
-    <div class="quote-row">
-      <span>Other Costs</span>
-      <span>€${other.toFixed(2)}</span>
-    </div>
-
-    <div class="total">
-      TOTAL: €${total.toFixed(2)}
-    </div>
-
-    <button
-      class="print-button"
-      onclick="window.print()">
-      Print / Save as PDF
-    </button>
-
-    <button
-      class="new-button"
-      onclick="newQuote()">
-      + New Quote
-    </button>
-
-  `;
-
-  quote.scrollIntoView({
-    behavior: "smooth"
-  });
 }
 
-function newQuote() {
+function removeItem(id){
 
-  document.getElementById("company").value = "";
-  document.getElementById("phone").value = "";
-  document.getElementById("email").value = "";
-  document.getElementById("client").value = "";
-  document.getElementById("project").value = "";
-  document.getElementById("area").value = "";
-  document.getElementById("price").value = "";
-  document.getElementById("materials").value = "";
-  document.getElementById("labor").value = "";
-  document.getElementById("other").value = "";
+items=items.filter(item=>item.id!==id);
 
-  document.getElementById("type").selectedIndex = 0;
+renderItems();
 
-  const quote = document.getElementById("quote");
-
-  quote.style.display = "none";
-  quote.innerHTML = "";
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
 }
+
+function renderItems(){
+
+const container=document.getElementById("items");
+
+container.innerHTML="";
+
+items.forEach(item=>{
+
+const div=document.createElement("div");
+
+div.className="item";
+
+div.innerHTML=`
+
+<label>Item / Work</label>
+
+<input
+placeholder="e.g. Concrete"
+value="${item.name}"
+oninput="updateItem(${item.id},'name',this.value)"
+>
+
+<div class="item-grid">
+
+<div>
+
+<label>Quantity</label>
+
+<input
+type="number"
+min="0"
+value="${item.qty}"
+oninput="updateItem(${item.id},'qty',this.value)"
+>
+
+</div>
+
+<div>
+
+<label>Price (€)</label>
+
+<input
+type="number"
+min="0"
+value="${item.price}"
+oninput="updateItem(${item.id},'price',this.value)"
+>
+
+</div>
+
+</div>
+
+<div class="item-total">
+Item Total: €${(item.qty*item.price).toFixed(2)}
+</div>
+
+<button
+class="red"
+onclick="removeItem(${item.id})">
+Remove Item
+</button>
+
+`;
+
+container.appendChild(div);
+
+});
+
+updateTotals();
+
+}
+
+function updateItem(id,key,value){
+
+const item=items.find(i=>i.id===id);
+
+if(!item)return;
+
+if(key==="name"){
+item.name=value;
+}else{
+item[key]=Number(value)||0;
+}
+
+renderItems();
+
+}
+
+function calculateSubtotal(){
+
+return items.reduce(
+(sum,item)=>sum+(item.qty*item.price),
+0
+);
+
+}
+
+function calculateFinal(){
+
+const subtotal=calculateSubtotal();
+
+const discountPercent=
+Number(document.getElementById("discount").value)||0;
+
+const vatPercent=
+Number(document.getElementById("vat").value)||0;
+
+const discount=
+subtotal*discountPercent/100;
+
+const afterDiscount=
+subtotal-discount;
+
+const vat=
+afterDiscount*vatPercent/100;
+
+const total=
+afterDiscount+vat;
+
+return{
+subtotal,
+discount,
+vat,
+total
+};
+
+}
+
+function updateTotals(){
+
+const data=calculateFinal();
+
+document.getElementById("liveTotals").innerHTML=`
+
+Subtotal: €${data.subtotal.toFixed(2)}
+<br>
+Discount: €${data.discount.toFixed(2)}
+<br>
+VAT: €${data.vat.toFixed(2)}
+<br>
+<strong>Total: €${data.total.toFixed(2)}</strong>
+
+`;
+
+}
+
+function generateQuote(){
+
+if(items.length===0){
+
+alert("Please add at least one construction item.");
+
+return;
+
+}
+
+const company=
+document.getElementById("company").value.trim()
+||"Construction Company";
+
+const phone=
+document.getElementById("phone").value.trim()
+||"Not provided";
+
+const email=
+document.getElementById("email").value.trim()
+||"Not provided";
+
+const client=
+document.getElementById("client").value.trim()
+||"Client";
+
+const project=
+document.getElementById("project").value.trim()
+||"Construction Project";
+
+const type=
+document.getElementById("type").value;
+
+const data=calculateFinal();
+
+const quoteNumber=
+"Q-"+Math.floor(10000+Math.random()*90000);
+
+const date=
+new Date().toLocaleDateString();
+
+let itemHTML="";
+
+items.forEach(item=>{
+
+itemHTML+=`
+
+<div class="quote-row">
+
+<span>
+${item.name||"Construction Work"}
+× ${item.qty}
+</span>
+
+<span>
+€${(item.qty*item.price).toFixed(2)}
+</span>
+
+</div>
+
+`;
+
+});
+
+const quote=document.getElementById("quote");
+
+quote.style.display="block";
+
+quote.innerHTML=`
+
+<div class="quote-header">
+
+<div style="font-size:45px">
+🏗️
+</div>
+
+<h2>PROQUOTE CONSTRUCTION</h2>
+
+<p><strong>${company}</strong></p>
+
+<p>📞 ${phone}</p>
+
+<p>✉️ ${email}</p>
+
+<p>
+<strong>Quote #:</strong>
+${quoteNumber}
+</p>
+
+<p>
+<strong>Date:</strong>
+${date}
+</p>
+
+</div>
+
+<p>
+<strong>Client:</strong>
+${client}
+</p>
+
+<p>
+<strong>Project:</strong>
+${project}
+</p>
+
+<p>
+<strong>Type:</strong>
+${type}
+</p>
+
+<h3>Cost Breakdown</h3>
+
+${itemHTML}
+
+<div class="quote-row">
+
+<span>Subtotal</span>
+
+<span>
+€${data.subtotal.toFixed(2)}
+</span>
+
+</div>
+
+<div class="quote-row">
+
+<span>Discount</span>
+
+<span>
+-€${data.discount.toFixed(2)}
+</span>
+
+</div>
+
+<div class="quote-row">
+
+<span>VAT</span>
+
+<span>
+€${data.vat.toFixed(2)}
+</span>
+
+</div>
+
+<div class="total">
+
+TOTAL:
+€${data.total.toFixed(2)}
+
+</div>
+
+<div class="print-hide">
+
+<button
+class="green"
+onclick="saveQuote()">
+💾 Save Quote
+</button>
+
+<button
+class="secondary"
+onclick="window.print()">
+📄 Print / Save PDF
+</button>
+
+<button
+class="secondary"
+onclick="newQuote()">
++ New Quote
+</button>
+
+</div>
+
+`;
+
+quote.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+function saveQuote(){
+
+const data=calculateFinal();
+
+const quote={
+
+id:Date.now(),
+
+company:
+document.getElementById("company").value,
+
+client:
+document.getElementById("client").value,
+
+project:
+document.getElementById("project").value,
+
+type:
+document.getElementById("type").value,
+
+total:data.total,
+
+date:new Date().toLocaleDateString()
+
+};
+
+let saved=
+JSON.parse(
+localStorage.getItem("proquotes")||"[]"
+);
+
+saved.unshift(quote);
+
+localStorage.setItem(
+"proquotes",
+JSON.stringify(saved)
+);
+
+showHistory();
+
+alert("Quote saved successfully!");
+
+}
+
+function showHistory(){
+
+const container=
+document.getElementById("history");
+
+let saved=
+JSON.parse(
+localStorage.getItem("proquotes")||"[]"
+);
+
+const search=
+document.getElementById("search").value
+.toLowerCase();
+
+saved=saved.filter(q=>
+
+(q.client||"")
+.toLowerCase()
+.includes(search)
+
+||
+
+(q.project||"")
+.toLowerCase()
+.includes(search)
+
+);
+
+if(saved.length===0){
+
+container.innerHTML=
+"<p class='small'>No saved quotes yet.</p>";
+
+return;
+
+}
+
+container.innerHTML="";
+
+saved.forEach(q=>{
+
+const div=
+document.createElement("div");
+
+div.className="history-item";
+
+div.innerHTML=`
+
+<strong>
+${q.project||"Project"}
+</strong>
+
+<p class="small">
+Client: ${q.client||"Client"}
+</p>
+
+<p class="small">
+Date: ${q.date}
+</p>
+
+<p>
+<strong>
+€${Number(q.total).toFixed(2)}
+</strong>
+</p>
+
+<button
+class="red"
+onclick="deleteQuote(${q.id})">
+Delete
+</button>
+
+`;
+
+container.appendChild(div);
+
+});
+
+}
+
+function deleteQuote(id){
+
+let saved=
+JSON.parse(
+localStorage.getItem("proquotes")||"[]"
+);
+
+saved=saved.filter(q=>q.id!==id);
+
+localStorage.setItem(
+"proquotes",
+JSON.stringify(saved)
+);
+
+showHistory();
+
+}
+
+function newQuote(){
+
+document.getElementById("company").value="";
+document.getElementById("phone").value="";
+document.getElementById("email").value="";
+document.getElementById("client").value="";
+document.getElementById("project").value="";
+document.getElementById("discount").value=0;
+document.getElementById("vat").value=0;
+
+document.getElementById("type").selectedIndex=0;
+
+items=[];
+
+itemCounter=0;
+
+renderItems();
+
+const quote=
+document.getElementById("quote");
+
+quote.style.display="none";
+
+quote.innerHTML="";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+addItem();
+
+showHistory();
 
 </script>
 
